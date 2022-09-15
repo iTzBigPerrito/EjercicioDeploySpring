@@ -23,7 +23,6 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/api/laptops").permitAll()
-                .antMatchers("/api/laptops/{id}").hasRole("ADMIN")
                 .anyRequest()
                 .authenticated()
                 .and().formLogin()
@@ -43,7 +42,7 @@ public class WebSecurityConfig {
                 .build();
         UserDetails admin = User.withDefaultPasswordEncoder()
                 .username("admin")
-                .password("12345")
+                .password("password")
                 .roles("ADMIN", "USER")
                 .build();
         return new InMemoryUserDetailsManager(user, admin);
